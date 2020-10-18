@@ -10,9 +10,9 @@
     </author>
     <updated>2020-10-18T04:13:37.000Z</updated>
     <entry>
-        <id>https://maoyifan.github.io/2020/10/18/hello-world/</id>
+        <id>https://maoyifan.github.io/hello-world/</id>
         <title>Hello World</title>
-        <link rel="alternate" href="https://maoyifan.github.io/2020/10/18/hello-world/"/>
+        <link rel="alternate" href="https://maoyifan.github.io/hello-world/"/>
         <content type="html">&lt;h2 id=&#34;quick-start&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#quick-start&#34;&gt;#&lt;/a&gt; Quick Start&lt;/h2&gt;
 &lt;h3 id=&#34;create-a-new-post&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#create-a-new-post&#34;&gt;#&lt;/a&gt; Create a new post&lt;/h3&gt;
 &lt;p&gt;&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ hexo new &lt;span class=&#34;string&#34;&gt;&amp;quot;My New Post&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -30,9 +30,9 @@
         <updated>2020-10-18T04:13:37.000Z</updated>
     </entry>
     <entry>
-        <id>https://maoyifan.github.io/2020/08/13/computer-science/note/theme-shoka-doc/special/</id>
+        <id>https://maoyifan.github.io/computer-science/note/theme-shoka-doc/special/</id>
         <title>Step.4 主题特殊功能</title>
-        <link rel="alternate" href="https://maoyifan.github.io/2020/08/13/computer-science/note/theme-shoka-doc/special/"/>
+        <link rel="alternate" href="https://maoyifan.github.io/computer-science/note/theme-shoka-doc/special/"/>
         <content type="html">&lt;div class=&#34;note primary&#34;&gt;
 &lt;p&gt;&lt;a href=&#34;/computer-science/note/theme-shoka-doc/&#34;&gt;🚀快速开始&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/dependents/&#34;&gt;💌依赖插件&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/config/&#34;&gt;📌基本配置&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/display/&#34;&gt;🌈界面显示&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/special/&#34;&gt;&lt;strong&gt;🦄特殊功能&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -606,9 +606,9 @@ c-16-25.333-24-45-24-59z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/spa
         <updated>2020-08-13T13:45:48.000Z</updated>
     </entry>
     <entry>
-        <id>https://maoyifan.github.io/2020/08/13/computer-science/note/theme-shoka-doc/display/</id>
+        <id>https://maoyifan.github.io/computer-science/note/theme-shoka-doc/display/</id>
         <title>Step.3 界面显示</title>
-        <link rel="alternate" href="https://maoyifan.github.io/2020/08/13/computer-science/note/theme-shoka-doc/display/"/>
+        <link rel="alternate" href="https://maoyifan.github.io/computer-science/note/theme-shoka-doc/display/"/>
         <content type="html">&lt;div class=&#34;note primary&#34;&gt;
 &lt;p&gt;&lt;a href=&#34;/computer-science/note/theme-shoka-doc/&#34;&gt;🚀快速开始&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/dependents/&#34;&gt;💌依赖插件&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/config/&#34;&gt;📌基本配置&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/display/&#34;&gt;&lt;strong&gt;🌈界面显示&lt;/strong&gt;&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/special/&#34;&gt;🦄特殊功能&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -723,9 +723,9 @@ c-16-25.333-24-45-24-59z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/spa
         <updated>2020-08-13T13:12:48.000Z</updated>
     </entry>
     <entry>
-        <id>https://maoyifan.github.io/2020/08/13/computer-science/note/theme-shoka-doc/config/</id>
+        <id>https://maoyifan.github.io/computer-science/note/theme-shoka-doc/config/</id>
         <title>Step.2 基本配置</title>
-        <link rel="alternate" href="https://maoyifan.github.io/2020/08/13/computer-science/note/theme-shoka-doc/config/"/>
+        <link rel="alternate" href="https://maoyifan.github.io/computer-science/note/theme-shoka-doc/config/"/>
         <content type="html">&lt;div class=&#34;note primary&#34;&gt;
 &lt;p&gt;&lt;a href=&#34;/computer-science/note/theme-shoka-doc/&#34;&gt;🚀快速开始&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/dependents/&#34;&gt;💌依赖插件&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/config/&#34;&gt;&lt;strong&gt;📌基本配置&lt;/strong&gt;&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/display/&#34;&gt;🌈界面显示&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/special/&#34;&gt;🦄特殊功能&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -876,9 +876,9 @@ PS：jsDelivr 并不是实时更新，重新生成文件后需要耐心等待&lt
         <updated>2020-08-13T12:56:48.000Z</updated>
     </entry>
     <entry>
-        <id>https://maoyifan.github.io/2020/08/13/computer-science/note/theme-shoka-doc/dependents/</id>
+        <id>https://maoyifan.github.io/computer-science/note/theme-shoka-doc/dependents/</id>
         <title>Step.1 依赖插件</title>
-        <link rel="alternate" href="https://maoyifan.github.io/2020/08/13/computer-science/note/theme-shoka-doc/dependents/"/>
+        <link rel="alternate" href="https://maoyifan.github.io/computer-science/note/theme-shoka-doc/dependents/"/>
         <content type="html">&lt;div class=&#34;note primary&#34;&gt;
 &lt;p&gt;&lt;a href=&#34;/computer-science/note/theme-shoka-doc/&#34;&gt;🚀快速开始&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/dependents/&#34;&gt;&lt;strong&gt;💌依赖插件&lt;/strong&gt;&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/config/&#34;&gt;📌基本配置&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/display/&#34;&gt;🌈界面显示&lt;/a&gt; - &lt;a href=&#34;/computer-science/note/theme-shoka-doc/special/&#34;&gt;🦄特殊功能&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -984,9 +984,9 @@ puppeteer 主要是用来渲染 mermaid 流程图，只要文章中不使用 mer
         <updated>2020-08-13T12:46:48.000Z</updated>
     </entry>
     <entry>
-        <id>https://maoyifan.github.io/2020/08/13/computer-science/note/theme-shoka-doc/</id>
+        <id>https://maoyifan.github.io/computer-science/note/theme-shoka-doc/</id>
         <title>Hexo主题Shoka &amp; multi-markdown-it渲染器使用说明</title>
-        <link rel="alternate" href="https://maoyifan.github.io/2020/08/13/computer-science/note/theme-shoka-doc/"/>
+        <link rel="alternate" href="https://maoyifan.github.io/computer-science/note/theme-shoka-doc/"/>
         <content type="html">&lt;div class=&#34;note info&#34;&gt;
 &lt;p&gt;跳票 N 久终于更新的简单的使用说明&lt;/p&gt;
 &lt;ul&gt;
@@ -1069,9 +1069,9 @@ puppeteer 主要是用来渲染 mermaid 流程图，只要文章中不使用 mer
         <updated>2020-08-13T12:45:48.000Z</updated>
     </entry>
     <entry>
-        <id>https://maoyifan.github.io/2020/04/13/computer-science/java/course-1/week-2/</id>
+        <id>https://maoyifan.github.io/computer-science/java/course-1/week-2/</id>
         <title>第2周 判断</title>
-        <link rel="alternate" href="https://maoyifan.github.io/2020/04/13/computer-science/java/course-1/week-2/"/>
+        <link rel="alternate" href="https://maoyifan.github.io/computer-science/java/course-1/week-2/"/>
         <content type="html">&lt;p&gt;:::note info&lt;br /&gt;
  以下为个人学习笔记和习题整理&lt;br /&gt;
 课程：零基础学 Java 语言 - 浙江大学 - 翁恺 @ 中国大学 MOOC&lt;br /&gt;
@@ -1247,9 +1247,9 @@ grape&lt;/p&gt;
         <updated>2020-04-13T11:12:45.000Z</updated>
     </entry>
     <entry>
-        <id>https://maoyifan.github.io/2020/04/12/computer-science/java/course-1/week-1/</id>
+        <id>https://maoyifan.github.io/computer-science/java/course-1/week-1/</id>
         <title>第1周 计算</title>
-        <link rel="alternate" href="https://maoyifan.github.io/2020/04/12/computer-science/java/course-1/week-1/"/>
+        <link rel="alternate" href="https://maoyifan.github.io/computer-science/java/course-1/week-1/"/>
         <content type="html">&lt;p&gt;:::note info&lt;br /&gt;
  以下为个人学习笔记和习题整理&lt;br /&gt;
 课程：零基础学 Java 语言 - 浙江大学 - 翁恺 @ 中国大学 MOOC&lt;br /&gt;
