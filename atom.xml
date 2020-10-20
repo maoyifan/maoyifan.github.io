@@ -18,29 +18,27 @@ Java 与 C++ 之间有一堵由内存动态分配和垃圾收集技术围城的�
 :::&lt;/p&gt;
 &lt;h1 id=&#34;运行时数据区&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#运行时数据区&#34;&gt;#&lt;/a&gt; 运行时数据区&lt;/h1&gt;
 &lt;h2 id=&#34;程序计数器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#程序计数器&#34;&gt;#&lt;/a&gt; 程序计数器&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;它是一块较小的内存空间，可以看作是当前线程所执行的字节码的行号指示器。`线程私有`。
-由于Java虚拟机的多线程是通过线程轮流切换、分配器处理执行时间的方式实现的。任一时刻，一个处理器都只会处理一条线程中的指令。因此，为了
-线程切换后能够恢复到正确的执行位置，每个线程都需要一个独立的程序计数器。
-此内存区域是唯一一个在《Java虚拟机规范》中没有规定任何OutOfMemoryError的区域。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;它是一块较小的内存空间，可以看作是当前线程所执行的字节码的行号指示器。 &lt;code&gt;线程私有&lt;/code&gt; 。&lt;br /&gt;
+由于 Java 虚拟机的多线程是通过线程轮流切换、分配器处理执行时间的方式实现的。任一时刻，一个处理器都只会处理一条线程中的指令。因此，为了&lt;br /&gt;
+线程切换后能够恢复到正确的执行位置，每个线程都需要一个独立的程序计数器。&lt;br /&gt;
+此内存区域是唯一一个在《Java 虚拟机规范》中没有规定任何 OutOfMemoryError 的区域。&lt;/p&gt;
 &lt;h2 id=&#34;java虚拟机栈&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#java虚拟机栈&#34;&gt;#&lt;/a&gt; Java 虚拟机栈&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;`线程私有`，与线程的生命周期相同。每个方法被执行时，Java虚拟机栈都会同步创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等。
-局部变量表中存放编译期可知的基本数据类型（boolean、byte、char、shor、int、long、float、double）、对象引用和returnAddress（指向一条字节码指令的地址）。
-两类异常：
-	- 线程请求的栈深度大于虚拟机所允许的深度、将抛出StackOverflowError异常；
-	- 如果Java虚拟机栈容量可以动态扩展，当栈扩展时无法申请到足够的内存将会抛出OutOfMemoryError异常。
-Java类库中的API中的JavaSE API子集和Java虚拟机。是`Java程序运行`的标准环境。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;线程私有&lt;/code&gt; ，与线程的生命周期相同。每个方法被执行时，Java 虚拟机栈都会同步创建一个栈帧用于存储局部变量表、操作数栈、动态链接、方法出口等。局部变量表中存放编译期可知的基本数据类型（boolean、byte、char、shor、int、long、float、double）、对象引用和 returnAddress（指向一条字节码指令的地址）。&lt;br /&gt;
+两类异常：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线程请求的栈深度大于虚拟机所允许的深度、将抛出 StackOverflowError 异常；&lt;/li&gt;
+&lt;li&gt;如果 Java 虚拟机栈容量可以动态扩展，当栈扩展时无法申请到足够的内存将会抛出 OutOfMemoryError 异常。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;本地方法栈&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#本地方法栈&#34;&gt;#&lt;/a&gt; 本地方法栈&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;`线程私有`，为虚拟机使用本地方法提供服务。
-两类异常：
-	- 线程请求的栈深度大于虚拟机所允许的深度、将抛出StackOverflowError异常；
-	- 如果Java虚拟机栈容量可以动态扩展，当栈扩展时无法申请到足够的内存将会抛出OutOfMemoryError异常。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;线程私有&lt;/code&gt; ，为虚拟机使用本地方法提供服务。&lt;br /&gt;
+两类异常：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线程请求的栈深度大于虚拟机所允许的深度、将抛出 StackOverflowError 异常；&lt;/li&gt;
+&lt;li&gt;如果 Java 虚拟机栈容量可以动态扩展，当栈扩展时无法申请到足够的内存将会抛出 OutOfMemoryError 异常。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;java堆&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#java堆&#34;&gt;#&lt;/a&gt; Java 堆&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;`线程共享`，此内存区域的唯一目的：存放对象实例。“所有的对象实例及数组都应当在堆上分配”。
-Java堆是垃圾收集器管理的内存区域，又叫“GC 堆”。Java堆中没有完成实例分配将会抛出OutOfMemoryError异常。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;线程共享&lt;/code&gt; ，此内存区域的唯一目的：存放对象实例。“所有的对象实例及数组都应当在堆上分配”。&lt;br /&gt;
+Java 堆是垃圾收集器管理的内存区域，又叫 “GC 堆”。Java 堆中没有完成实例分配将会抛出 OutOfMemoryError 异常。&lt;/p&gt;
 &lt;h2 id=&#34;方法区&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#方法区&#34;&gt;#&lt;/a&gt; 方法区&lt;/h2&gt;
 &lt;pre&gt;&lt;code&gt;`线程共享`，用于存储已被虚拟机加载的类型信息、常量、静态常量、即时编译器编译后的代码缓存等数据。
 `JDK8`以后完全放弃方法区的概念，改为在本地内存中实现的元空间。
@@ -48,32 +46,33 @@ Java堆是垃圾收集器管理的内存区域，又叫“GC 堆”。Java堆中
 &lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;hotspot虚拟机对象探秘&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#hotspot虚拟机对象探秘&#34;&gt;#&lt;/a&gt; HotSpot 虚拟机对象探秘&lt;/h1&gt;
 &lt;h2 id=&#34;对象的创建&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对象的创建&#34;&gt;#&lt;/a&gt; 对象的创建&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;在类加载检查通过后， 接下来虚拟机将为新生对象分配内存。
-1.指针碰撞
-	假设Java堆中内存是绝对规整的， 所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离， 这种分配方式称为“ 指针碰撞” （ Bump the Pointer）。
-2.空闲列表
-	如果Java堆中的内存并不是规整的，已使用的内存和空闲的内存相互交错，就没有办法简单地进行指针碰撞了。虚拟机就必须维护一个列表，记录上哪些内存块是可用的，在分配的时候从列表中找到一块足够大的空间划分给对象实例， 并更新列表上的记录。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在类加载检查通过后， 接下来虚拟机将为新生对象分配内存。&lt;br /&gt;
+1. 指针碰撞&lt;br /&gt;
+假设 Java 堆中内存是绝对规整的， 所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离， 这种分配方式称为 “指针碰撞” （ Bump the Pointer）。&lt;br /&gt;
+2. 空闲列表&lt;br /&gt;
+如果 Java 堆中的内存并不是规整的，已使用的内存和空闲的内存相互交错，就没有办法简单地进行指针碰撞了。虚拟机就必须维护一个列表，记录上哪些内存块是可用的在分配的时候从列表中找到一块足够大的空间划分给对象实例， 并更新列表上的记录。&lt;/p&gt;
 &lt;h2 id=&#34;对象的内存布局&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对象的内存布局&#34;&gt;#&lt;/a&gt; 对象的内存布局&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;对象在内存中存储的布局可以分为3块区域： 对象头（Header）、实例数据（InstanceData）、对齐填充（ Padding）。
-`对象头`
-- 对象头包括两部分信息，第一部分用于存储对象自身的运行时数据， 如哈希码（ HashCode）、GC分代年龄、 锁状态标志、 线程持有的锁、 偏向线程ID、 偏 向时间戳等， 这部分数据的长度在32位和64位的虚拟机（ 未开启压缩指针）中分别为32bit和64bit，官方称它为“ Mark Word” 。
-- 另外一部分是类型指针， 即对象指向它的类元数据的指针， 虚拟机通过这个指针来确定这个对象是哪个类的实例。 
-`实例数据`
-实例数据部分是对象真正存储的有效信息， 也是在程序代码中所定义的各种类型的字段内容。 无论是从父类继承下来的， 还是在子类中定义的，需要记录起来。
-`对齐填充` 
-仅仅起着占位符的作用。 由于HotSpot VM的自动内存管理系统要求对象起始地址必须是8字节的整数倍， 换句话说， 就是对象的大小必须是8字节的整数倍。 而对象头部分正好是8字节的倍数（ 1倍或者2倍），因此，当对象实例数据部分没有对齐时， 就需要通过对齐填充来补全。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;对象在内存中存储的布局可以分为 3 块区域： 对象头（Header）、实例数据（InstanceData）、对齐填充（ Padding）。&lt;br /&gt;
+ &lt;code&gt;对象头&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对象头包括两部分信息，第一部分用于存储对象自身的运行时数据， 如哈希码（ HashCode）、GC 分代年龄、 锁状态标志、 线程持有的锁、 偏向线程 ID、 偏 向时间戳等， 这部分数据的长度在 32 位和 64 位的虚拟机（ 未开启压缩指针）中分别为 32bit 和 64bit，官方称它为 “Mark Word” 。&lt;/li&gt;
+&lt;li&gt;另外一部分是类型指针， 即对象指向它的类元数据的指针， 虚拟机通过这个指针来确定这个对象是哪个类的实例。&lt;br /&gt;
+ &lt;code&gt;实例数据&lt;/code&gt; &lt;br /&gt;
+实例数据部分是对象真正存储的有效信息， 也是在程序代码中所定义的各种类型的字段内容。 无论是从父类继承下来的， 还是在子类中定义的，需要记录起来。&lt;br /&gt;
+ &lt;code&gt;对齐填充&lt;/code&gt; &lt;br /&gt;
+仅仅起着占位符的作用。 由于 HotSpot VM 的自动内存管理系统要求对象起始地址必须是 8 字节的整数倍， 换句话说， 就是对象的大小必须是 8 字节的整数倍。 而对象头部分正好是 8 字节的倍数（ 1 倍或者 2 倍），因此，当对象实例数据部分没有对齐时， 就需要通过对齐填充来补全。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;对象的访问定位&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对象的访问定位&#34;&gt;#&lt;/a&gt; 对象的访问定位&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;主流的访问方式主要有两种：
-- 句柄
-	如果使用句柄访问的话，那么Java堆中将会划分出一块内存来作为句柄池，reference中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息，
-- 直接指针
-	使用直接指针访问， 那么Java堆对象的布局中就必须考虑如何放置访问类型数据的相关信息，而reference中存储的直接就是对象地址。
-优缺点：
-	句柄来访问的最大好处就是reference中存储的是稳定的句柄地址， 在对象被移动时只会改变句柄中的实例数据指针， 而reference本身不需要修改。
-	直接指针访问方式的最大好处就是速度更快，它节省了一次指针定位的时间开销，由于对象的访问在Java中非常频繁，因此这类开销积少成多后也是一项非常可观的执行成本。（HotSpot使用这种）。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;主流的访问方式主要有两种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;句柄&lt;br /&gt;
+如果使用句柄访问的话，那么 Java 堆中将会划分出一块内存来作为句柄池，reference 中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息，&lt;/li&gt;
+&lt;li&gt;直接指针&lt;br /&gt;
+使用直接指针访问， 那么 Java 堆对象的布局中就必须考虑如何放置访问类型数据的相关信息，而 reference 中存储的直接就是对象地址。&lt;br /&gt;
+优缺点：&lt;br /&gt;
+句柄来访问的最大好处就是 reference 中存储的是稳定的句柄地址， 在对象被移动时只会改变句柄中的实例数据指针， 而 reference 本身不需要修改。&lt;br /&gt;
+直接指针访问方式的最大好处就是速度更快，它节省了一次指针定位的时间开销，由于对象的访问在 Java 中非常频繁，因此这类开销积少成多后也是一项非常可观的执行成本。（HotSpot 使用这种）。&lt;/li&gt;
+&lt;/ul&gt;
 </content>
         <category term="计算机科学" scheme="https://maoyifan.github.io/categories/computer-science/" />
         <category term="Java" scheme="https://maoyifan.github.io/categories/computer-science/java/" />
