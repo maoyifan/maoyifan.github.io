@@ -13,12 +13,10 @@
         <id>https://maoyifan.github.io/computer-science/java/course-2/week-2/</id>
         <title>第二章 Java内存区域与内存溢出异常</title>
         <link rel="alternate" href="https://maoyifan.github.io/computer-science/java/course-2/week-2/"/>
-        <content type="html">&lt;p&gt;:::note info&lt;br /&gt;
-Java 与 C++ 之间有一堵由内存动态分配和垃圾收集技术围城的高墙，墙外的人想进去，墙里面的人却想出来！&lt;br /&gt;
-:::&lt;/p&gt;
+        <content type="html">&lt;p&gt;&lt;code&gt;Java与C++之间有一堵由内存动态分配和垃圾收集技术围城的高墙，墙外的人想进去，墙里面的人却想出来！&lt;/code&gt;&lt;/p&gt;
 &lt;h1 id=&#34;运行时数据区&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#运行时数据区&#34;&gt;#&lt;/a&gt; 运行时数据区&lt;/h1&gt;
 &lt;h2 id=&#34;程序计数器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#程序计数器&#34;&gt;#&lt;/a&gt; 程序计数器&lt;/h2&gt;
-&lt;p&gt;它是一块较小的内存空间，可以看作是当前线程所执行的字节码的行号指示器。 &lt;code&gt;线程私有&lt;/code&gt; 。&lt;br /&gt;
+&lt;p&gt;&lt;code&gt;线程私有&lt;/code&gt; ，它是一块较小的内存空间，可以看作是当前线程所执行的字节码的行号指示器。&lt;br /&gt;
 由于 Java 虚拟机的多线程是通过线程轮流切换、分配器处理执行时间的方式实现的。任一时刻，一个处理器都只会处理一条线程中的指令。因此，为了&lt;br /&gt;
 线程切换后能够恢复到正确的执行位置，每个线程都需要一个独立的程序计数器。&lt;br /&gt;
 此内存区域是唯一一个在《Java 虚拟机规范》中没有规定任何 OutOfMemoryError 的区域。&lt;/p&gt;
@@ -40,16 +38,15 @@ Java 与 C++ 之间有一堵由内存动态分配和垃圾收集技术围城的�
 &lt;p&gt;&lt;code&gt;线程共享&lt;/code&gt; ，此内存区域的唯一目的：存放对象实例。“所有的对象实例及数组都应当在堆上分配”。&lt;br /&gt;
 Java 堆是垃圾收集器管理的内存区域，又叫 “GC 堆”。Java 堆中没有完成实例分配将会抛出 OutOfMemoryError 异常。&lt;/p&gt;
 &lt;h2 id=&#34;方法区&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#方法区&#34;&gt;#&lt;/a&gt; 方法区&lt;/h2&gt;
-&lt;pre&gt;&lt;code&gt;`线程共享`，用于存储已被虚拟机加载的类型信息、常量、静态常量、即时编译器编译后的代码缓存等数据。
-`JDK8`以后完全放弃方法区的概念，改为在本地内存中实现的元空间。
-如果方法区无法满足新的内存分配的需求时，将会抛出OutOfMemoryError异常。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;线程共享&lt;/code&gt; ，用于存储已被虚拟机加载的类型信息、常量、静态常量、即时编译器编译后的代码缓存等数据。&lt;br /&gt;
+ &lt;code&gt;JDK8&lt;/code&gt;  以后完全放弃方法区的概念，改为在本地内存中实现的元空间。&lt;br /&gt;
+如果方法区无法满足新的内存分配的需求时，将会抛出 OutOfMemoryError 异常。&lt;/p&gt;
 &lt;h1 id=&#34;hotspot虚拟机对象探秘&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#hotspot虚拟机对象探秘&#34;&gt;#&lt;/a&gt; HotSpot 虚拟机对象探秘&lt;/h1&gt;
 &lt;h2 id=&#34;对象的创建&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对象的创建&#34;&gt;#&lt;/a&gt; 对象的创建&lt;/h2&gt;
 &lt;p&gt;在类加载检查通过后， 接下来虚拟机将为新生对象分配内存。&lt;br /&gt;
-1. 指针碰撞&lt;br /&gt;
+ &lt;code&gt;指针碰撞&lt;/code&gt; &lt;br /&gt;
 假设 Java 堆中内存是绝对规整的， 所有用过的内存都放在一边，空闲的内存放在另一边，中间放着一个指针作为分界点的指示器，那所分配内存就仅仅是把那个指针向空闲空间那边挪动一段与对象大小相等的距离， 这种分配方式称为 “指针碰撞” （ Bump the Pointer）。&lt;br /&gt;
-2. 空闲列表&lt;br /&gt;
+ &lt;code&gt;空闲列表&lt;/code&gt; &lt;br /&gt;
 如果 Java 堆中的内存并不是规整的，已使用的内存和空闲的内存相互交错，就没有办法简单地进行指针碰撞了。虚拟机就必须维护一个列表，记录上哪些内存块是可用的在分配的时候从列表中找到一块足够大的空间划分给对象实例， 并更新列表上的记录。&lt;/p&gt;
 &lt;h2 id=&#34;对象的内存布局&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对象的内存布局&#34;&gt;#&lt;/a&gt; 对象的内存布局&lt;/h2&gt;
 &lt;p&gt;对象在内存中存储的布局可以分为 3 块区域： 对象头（Header）、实例数据（InstanceData）、对齐填充（ Padding）。&lt;br /&gt;
@@ -69,7 +66,7 @@ Java 堆是垃圾收集器管理的内存区域，又叫 “GC 堆”。Java 堆
 如果使用句柄访问的话，那么 Java 堆中将会划分出一块内存来作为句柄池，reference 中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息，&lt;/li&gt;
 &lt;li&gt;直接指针&lt;br /&gt;
 使用直接指针访问， 那么 Java 堆对象的布局中就必须考虑如何放置访问类型数据的相关信息，而 reference 中存储的直接就是对象地址。&lt;br /&gt;
-优缺点：&lt;br /&gt;
+ &lt;code&gt;优缺点&lt;/code&gt; &lt;br /&gt;
 句柄来访问的最大好处就是 reference 中存储的是稳定的句柄地址， 在对象被移动时只会改变句柄中的实例数据指针， 而 reference 本身不需要修改。&lt;br /&gt;
 直接指针访问方式的最大好处就是速度更快，它节省了一次指针定位的时间开销，由于对象的访问在 Java 中非常频繁，因此这类开销积少成多后也是一项非常可观的执行成本。（HotSpot 使用这种）。&lt;/li&gt;
 &lt;/ul&gt;
@@ -88,17 +85,16 @@ Java 堆是垃圾收集器管理的内存区域，又叫 “GC 堆”。Java 堆
 :::&lt;/p&gt;
 &lt;h1 id=&#34;java技术体系&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#java技术体系&#34;&gt;#&lt;/a&gt; Java 技术体系&lt;/h1&gt;
 &lt;h3 id=&#34;jdk&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#jdk&#34;&gt;#&lt;/a&gt; JDK&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;Java程序设计语言、Java虚拟机、Java类库。JDK是支持`Java程序开发`的最小环境。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Java 程序设计语言、Java 虚拟机、Java 类库。JDK 是支持 &lt;code&gt;Java程序开发&lt;/code&gt; 的最小环境。&lt;/p&gt;
 &lt;h3 id=&#34;jre&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#jre&#34;&gt;#&lt;/a&gt; JRE&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;Java类库中的API中的JavaSE API子集和Java虚拟机。是`Java程序运行`的标准环境。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Java 类库中的 API 中的 JavaSE API 子集和 Java 虚拟机。是 &lt;code&gt;Java程序运行&lt;/code&gt; 的标准环境。&lt;/p&gt;
 &lt;h3 id=&#34;java技术体系主要产品线&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#java技术体系主要产品线&#34;&gt;#&lt;/a&gt; Java 技术体系主要产品线&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;- Java Card：支持小程序运行在小内存设备上的平台；
-- Java ME：支持Java程序运行在移动终端，JDK6以前被称为J2ME。基于Java语言开发程序Android不属于Java ME。
-- Java SE：面向桌面级应用（Windows下的应用程序）。
-- JavaEE：支持多层架构的企业级应用。
-&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;Java Card：支持小程序运行在小内存设备上的平台；&lt;/li&gt;
+&lt;li&gt;Java ME：支持 Java 程序运行在移动终端，JDK6 以前被称为 J2ME。基于 Java 语言开发程序 Android 不属于 Java ME。&lt;/li&gt;
+&lt;li&gt;Java SE：面向桌面级应用（Windows 下的应用程序）。&lt;/li&gt;
+&lt;li&gt;JavaEE：支持多层架构的企业级应用。&lt;/li&gt;
+&lt;/ul&gt;
 </content>
         <category term="计算机科学" scheme="https://maoyifan.github.io/categories/computer-science/" />
         <category term="Java" scheme="https://maoyifan.github.io/categories/computer-science/java/" />
