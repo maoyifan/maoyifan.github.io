@@ -15,6 +15,7 @@
         <link rel="alternate" href="https://maoyifan.github.io/computer-science/java/course-2/week-2/"/>
         <content type="html">&lt;p&gt;&lt;code&gt;Java与C++之间有一堵由内存动态分配和垃圾收集技术围城的高墙，墙外的人想进去，墙里面的人却想出来！&lt;/code&gt;&lt;/p&gt;
 &lt;h1 id=&#34;运行时数据区&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#运行时数据区&#34;&gt;#&lt;/a&gt; 运行时数据区&lt;/h1&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/timg.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;程序计数器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#程序计数器&#34;&gt;#&lt;/a&gt; 程序计数器&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;线程私有&lt;/code&gt; ，它是一块较小的内存空间，可以看作是当前线程所执行的字节码的行号指示器。&lt;br /&gt;
 由于 Java 虚拟机的多线程是通过线程轮流切换、分配器处理执行时间的方式实现的。任一时刻，一个处理器都只会处理一条线程中的指令。因此，为了&lt;br /&gt;
@@ -84,6 +85,7 @@ Java 堆是垃圾收集器管理的内存区域，又叫 “GC 堆”。Java 堆
  以下为个人学习笔记和习题整理&lt;br /&gt;
 :::&lt;/p&gt;
 &lt;h1 id=&#34;java技术体系&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#java技术体系&#34;&gt;#&lt;/a&gt; Java 技术体系&lt;/h1&gt;
+&lt;p&gt;&lt;img data-src=&#34;/images/timg2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 &lt;h3 id=&#34;jdk&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#jdk&#34;&gt;#&lt;/a&gt; JDK&lt;/h3&gt;
 &lt;p&gt;Java 程序设计语言、Java 虚拟机、Java 类库。JDK 是支持 &lt;code&gt;Java程序开发&lt;/code&gt; 的最小环境。&lt;/p&gt;
 &lt;h3 id=&#34;jre&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#jre&#34;&gt;#&lt;/a&gt; JRE&lt;/h3&gt;
