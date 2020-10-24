@@ -10,26 +10,86 @@
         </author>
         <description></description>
         <language>zh_Hans</language>
-        <pubDate>Thu, 22 Oct 2020 21:38:25 +0800</pubDate>
-        <lastBuildDate>Thu, 22 Oct 2020 21:38:25 +0800</lastBuildDate>
+        <pubDate>Sat, 24 Oct 2020 19:23:25 +0800</pubDate>
+        <lastBuildDate>Sat, 24 Oct 2020 19:23:25 +0800</lastBuildDate>
+        <item>
+            <guid isPermalink="true">https://maoyifan.github.io/computer-science/java/course-2/week-7/</guid>
+            <title>第七章 常见面试题总结</title>
+            <link>https://maoyifan.github.io/computer-science/java/course-2/week-7/</link>
+            <category term="计算机科学" scheme="https://maoyifan.github.io/categories/computer-science/" />
+            <category term="Java" scheme="https://maoyifan.github.io/categories/computer-science/java/" />
+            <category term="深入理解Java虚拟机" scheme="https://maoyifan.github.io/categories/computer-science/java/course-2/" />
+            <pubDate>Sat, 24 Oct 2020 19:23:25 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;&lt;code&gt;来源网络收集&lt;/code&gt;&lt;/p&gt;
+&lt;h1 id=&#34;jvm启动模式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#jvm启动模式&#34;&gt;#&lt;/a&gt; JVM 启动模式&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;指定 JVM 启动模式&lt;br /&gt;
+可以通过 &lt;code&gt;-server&lt;/code&gt;  或者 &lt;code&gt;-client&lt;/code&gt;  参数指定启动模式。&lt;/li&gt;
+&lt;li&gt;两种模式的区别&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;编译器方面&lt;br /&gt;
+当虚拟机运行在 client 模式时，使用的是一个代号为 c1 的轻量级编译器，而 server 模式启动，虚拟机采用相对重量级，代号为 c2 的编译器；c2 编译器比 c1 编译器性能更高。&lt;/li&gt;
+&lt;li&gt;GC 方面&lt;br /&gt;
+ client 模式下的新生代采用 (Serial 收集器)、老年代 (Serial Old) 收集器，选择的是串行 GC。&lt;br /&gt;
+server 模式下的新生代和老年代均选择并行 GC；&lt;/li&gt;
+&lt;li&gt;启动方面&lt;br /&gt;
+ client 模式启动快、编译快、内存占用少、针对桌面级应用、优化客户端环境的启用时间。&lt;br /&gt;
+server 模式启动慢、编译更完全、效率高、针对服务端应用、优化服务器环境的最大执行速度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;如何优化java-gc&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#如何优化java-gc&#34;&gt;#&lt;/a&gt; 如何优化 Java GC&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;先描述 GC 及 GC 算法。&lt;/li&gt;
+&lt;li&gt;优化方向&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;降低进入老年代的对象数量&lt;/li&gt;
+&lt;li&gt;较少 FULL GC 的次数&lt;/li&gt;
+&lt;li&gt;优化 JVM 参数：堆和栈的大小、设置垃圾回收器的模式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;java8的元空间&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#java8的元空间&#34;&gt;#&lt;/a&gt; Java8 的元空间&lt;/h1&gt;
+&lt;p&gt;方法区：所有线程共享，存储类的信息、常量池、方法数据、方法代码。元空间与方法区的最大区别：元空间存放在本地内存而不是虚拟机中。&lt;br /&gt;
+&lt;strong&gt;为什么用元空间代替方法区&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;字符串在永久代中，容易出现性能问题及内存溢出；&lt;/li&gt;
+&lt;li&gt;类及方法的信息比较难确定大小，对于永久代的指定比较困难、太小永久代容易溢出、太大容易导致老年代溢出；&lt;/li&gt;
+&lt;li&gt;永久代会为 GC 带来不必要的复杂度，回收效率偏低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;jvm进程会启动哪些线程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#jvm进程会启动哪些线程&#34;&gt;#&lt;/a&gt; JVM 进程会启动哪些线程？&lt;/h1&gt;
+&lt;p&gt;每当使用 java 命令执行一个带 main 方法的类时，就会启动 JVM（应用程序），实际上就是在操作系统中启动一个 JVM 进程，JVM 启动时，必然会创建以下 5 个线程：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1-main                          主线程，执行我们指定的启动类的 main 方法&lt;/li&gt;
+&lt;li&gt;2-Reference Handler             处理引用的线程&lt;/li&gt;
+&lt;li&gt;3-Finalizer                     调用对象的 finalize 方法的线程，就是垃圾回收的线程&lt;/li&gt;
+&lt;li&gt;4-Signal Dispatcher             分发处理发送给 JVM 信号的线程&lt;/li&gt;
+&lt;li&gt;5-Attach Listener               负责接收外部的命令的线程&lt;/li&gt;
+&lt;/ul&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://maoyifan.github.io/computer-science/java/course-2/week-6/</guid>
-            <title>第八章 虚拟机字节码执行引擎</title>
+            <title>第六章 虚拟机字节码执行引擎</title>
             <link>https://maoyifan.github.io/computer-science/java/course-2/week-6/</link>
             <category term="计算机科学" scheme="https://maoyifan.github.io/categories/computer-science/" />
             <category term="Java" scheme="https://maoyifan.github.io/categories/computer-science/java/" />
             <category term="深入理解Java虚拟机" scheme="https://maoyifan.github.io/categories/computer-science/java/course-2/" />
-            <pubDate>Thu, 22 Oct 2020 21:38:25 +0800</pubDate>
+            <pubDate>Sat, 24 Oct 2020 18:38:25 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;&lt;code&gt;代码编译的结果从本地机器码转变为字节码，是存储格式发展的一小步，确是编程语言发展的一大步！&lt;/code&gt;&lt;/p&gt;
-&lt;h1 id=&#34;概述&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#概述&#34;&gt;#&lt;/a&gt; 概述&lt;/h1&gt;
-&lt;h2 id=&#34;无关系的基石&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#无关系的基石&#34;&gt;#&lt;/a&gt; 无关系的基石&lt;/h2&gt;
-&lt;p&gt;各种不同平台的 Java 虚拟机，以及所有平台都统一支持的程序存储格式 &lt;code&gt;字节码&lt;/code&gt; 是构成平台无关性的基石。&lt;br /&gt;
-实现语言无关性的基础仍然是虚拟机和字节码存储格式。 Java 虚拟机不和包括 Java 在内的任何语言绑定，它只与 &lt;code&gt;Class文件&lt;/code&gt; 这种特定的二进制文件格式所关联， Class 文件中包含了 Java 虚拟机指令集和符号表以及若干其他辅助信息。&lt;br /&gt;
-&lt;img data-src=&#34;/images/4.1.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;class-类文件的结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#class-类文件的结构&#34;&gt;#&lt;/a&gt; Class 类文件的结构&lt;/h2&gt;
-&lt;p&gt;Class 文件是一组以 8 位字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在 Class 文件之中，中间没有添加任何分隔符，这使得整个 Class 文件中存储的内容几乎全部是程序运行的必要数据， 没有空隙存在。&lt;br /&gt;
-Class 文件格式采用一种类似于 C 语言结构体的伪结构来存储数据， 这种伪结构中只有两种数据类型： &lt;code&gt;无符号数&lt;/code&gt; 和 &lt;code&gt;表&lt;/code&gt; .&lt;br /&gt;
-&lt;img data-src=&#34;/images/4.2.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;运行时栈帧结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#运行时栈帧结构&#34;&gt;#&lt;/a&gt; 运行时栈帧结构&lt;/h1&gt;
+&lt;p&gt;栈帧（ Stack Frame） 是用于支持虚拟机进行方法调用和方法执行的数据结构， 它是虚拟机运行时数据区中的虚拟机栈（ Virtual Machine Stack） [1] 的栈元素。 栈帧存储了方法的局部变量表、操作数栈、动态连接和方法返回地址等信息。每一个方法从调用开始至执行完成的过程，都对应着一个栈帧在虚拟机栈里面从入栈到出栈的过程。&lt;br /&gt;
+&lt;img data-src=&#34;/images/6.1.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;局部变量表&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#局部变量表&#34;&gt;#&lt;/a&gt; 局部变量表&lt;/h2&gt;
+&lt;p&gt;局部变量表（ Local Variable Table）是一组变量值存储空间，用于存放方法参数和方法内部定义的局部变量。&lt;/p&gt;
+&lt;h2 id=&#34;操作数栈&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#操作数栈&#34;&gt;#&lt;/a&gt; 操作数栈&lt;/h2&gt;
+&lt;p&gt;操作数栈（ Operand Stack）也常称为操作栈，它是一个后入先出（LastInFirstOut,LIFO）栈。同局部变量表一样，操作数栈的最大深度也在编译的时候写入到 Code 属性的 max_stacks 数据项中。&lt;br /&gt;
+操作数栈中元素的数据类型必须与字节码指令的序列严格匹配，在编译程序代码的时候，编译器要严格保证这一点， 在类校验阶段的数据流分析中还要再次验证这一点。&lt;/p&gt;
+&lt;h2 id=&#34;动态连接&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#动态连接&#34;&gt;#&lt;/a&gt; 动态连接&lt;/h2&gt;
+&lt;p&gt;每个栈帧都包含一个指向运行时常量池 [1] 中该栈帧所属方法的引用，持有这个引用是为了支持方法调用过程中的动态连接（ Dynamic Linking）。&lt;/p&gt;
+&lt;h2 id=&#34;方法返回地址&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#方法返回地址&#34;&gt;#&lt;/a&gt; 方法返回地址&lt;/h2&gt;
+&lt;p&gt;当一个方法开始执行后， 只有两种方式可以退出这个方法： &lt;code&gt;正常调用完成&lt;/code&gt; 、 &lt;code&gt;异常调用完成&lt;/code&gt; 。&lt;br /&gt;
+无论采用何种退出方式， 在方法退出之后， 都需要返回到方法被调用的位置，程序才能继续执行，方法返回时可能需要在栈帧中保存一些信息，用来帮助恢复它的上层方法的执行状态。一般来说，方法正常退出时，调用者的 PC 计数器的值可以作为返回地址，栈帧中很可能会保存这个计数器值。而方法异常退出时，返回地址是要通过异常处理器表来确定的， 栈帧中一般不会保存这部分信息。&lt;/p&gt;
+&lt;h2 id=&#34;附加信息&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#附加信息&#34;&gt;#&lt;/a&gt; 附加信息&lt;/h2&gt;
+&lt;p&gt;虚拟机规范允许具体的虚拟机实现增加一些规范里没有描述的信息到栈帧之中，例如与调试相关的信息，这部分信息完全取决于具体的虚拟机实现。&lt;/p&gt;
  ]]></description>
         </item>
         <item>
@@ -2697,216 +2757,6 @@ grape&lt;/p&gt;
             <category term="计算机科学" scheme="https://maoyifan.github.io/categories/computer-science/" />
             <category term="Java" scheme="https://maoyifan.github.io/categories/computer-science/java/" />
             <category term="现代操作系统" scheme="https://maoyifan.github.io/categories/computer-science/java/course-7/" />
-            <pubDate>Sun, 12 Apr 2020 20:46:25 +0800</pubDate>
-            <description><![CDATA[ &lt;p&gt;:::note info&lt;br /&gt;
- 以下为个人学习笔记和习题整理&lt;br /&gt;
-课程：零基础学 Java 语言 - 浙江大学 - 翁恺 @ 中国大学 MOOC&lt;br /&gt;
-&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuaWNvdXJzZTE2My5vcmcvY291cnNlL1pKVS0xMDAxNTQxMDAx&#34;&gt;https://www.icourse163.org/course/ZJU-1001541001&lt;/span&gt;&lt;br /&gt;
-:::&lt;/p&gt;
-&lt;h1 id=&#34;课堂笔记&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#课堂笔记&#34;&gt;#&lt;/a&gt; 课堂笔记&lt;/h1&gt;
-&lt;h2 id=&#34;读输入-字符串输出&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#读输入-字符串输出&#34;&gt;#&lt;/a&gt; 读输入、字符串输出&lt;/h2&gt;
-&lt;p&gt;&lt;figure class=&#34;highlight java&#34;&gt;&lt;figcaption&gt;&lt;span&gt;scanner&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; java.util.Scanner;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;Scanner in = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; Scanner(System.in);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// 输入Scan之后，按下键盘 Alt + “/” 键，Eclipse下自动补全。&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;System.out.println(in.nextLine());&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// 让in这个对象做读入下一行的动作，结果交给System.out这个对象去打印一行。&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// 字符串的 + 用来连接两个字符串形成更长的字符串。&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;System.out.println(&lt;span class=&#34;string&#34;&gt;&amp;quot;Hello&amp;quot;&lt;/span&gt; + &lt;span class=&#34;string&#34;&gt;&amp;quot; world.&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;System.out.println(&lt;span class=&#34;string&#34;&gt;&amp;quot;Hello&amp;quot;&lt;/span&gt; + &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;System.out.println(&lt;span class=&#34;string&#34;&gt;&amp;quot;Hello&amp;quot;&lt;/span&gt; + &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt; + &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;System.out.println(&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt; + &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt; + &lt;span class=&#34;string&#34;&gt;&amp;quot;Hello&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;tips：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;System.out.println&lt;/code&gt;  会换行， &lt;code&gt;System.out.print&lt;/code&gt;  则不会换行&lt;/li&gt;
-&lt;li&gt;出现警告： &lt;code&gt;Resource leak: &#39;in&#39; is never closed&lt;/code&gt; ，可以在函数的最后加入&lt;br /&gt;
- &lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;in.close();&lt;span class=&#34;comment&#34;&gt;//释放&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;变量&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#变量&#34;&gt;#&lt;/a&gt; 变量&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;形式&lt;/strong&gt;：&amp;lt;类型名称&amp;gt; &amp;lt; 变量名称 &amp;gt; = &amp;lt; 初始值 &amp;gt;&lt;br /&gt;
- &lt;code&gt;int price, amount; // 同时定义两个变量&lt;/code&gt; &lt;br /&gt;
- &lt;code&gt;int price = 0; // 定义变量并赋值&lt;/code&gt; &lt;br /&gt;
- &lt;code&gt;int price, amount = 100, age;&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;类型名称&lt;/strong&gt;：Java 是一种&lt;strong&gt;强类型语言&lt;/strong&gt;，所有变量在使用前必须定义或声明，所有变量必须具有确定的数据类型。数据类型表示在变量中可以存放什么样的数据，程序运行过程中也不能改变变量的类型。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;变量名称&lt;/strong&gt;：又称标识符，只能由字母、数字、下划线构成，数字不能出现在第一个位置。此外，Java 的保留字也不能用作标识符。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Java 的保留字列表&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;abstract&lt;/th&gt;
-&lt;th&gt;do&lt;/th&gt;
-&lt;th&gt;implements&lt;/th&gt;
-&lt;th&gt;protected&lt;/th&gt;
-&lt;th&gt;throws&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;boolean&lt;/td&gt;
-&lt;td&gt;double&lt;/td&gt;
-&lt;td&gt;import&lt;/td&gt;
-&lt;td&gt;public&lt;/td&gt;
-&lt;td&gt;transient&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;break&lt;/td&gt;
-&lt;td&gt;else&lt;/td&gt;
-&lt;td&gt;instanceof&lt;/td&gt;
-&lt;td&gt;return&lt;/td&gt;
-&lt;td&gt;true&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;byte&lt;/td&gt;
-&lt;td&gt;extends&lt;/td&gt;
-&lt;td&gt;int&lt;/td&gt;
-&lt;td&gt;short&lt;/td&gt;
-&lt;td&gt;try&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;case&lt;/td&gt;
-&lt;td&gt;false&lt;/td&gt;
-&lt;td&gt;interface&lt;/td&gt;
-&lt;td&gt;static&lt;/td&gt;
-&lt;td&gt;while&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;catch&lt;/td&gt;
-&lt;td&gt;final&lt;/td&gt;
-&lt;td&gt;long&lt;/td&gt;
-&lt;td&gt;strictfp&lt;/td&gt;
-&lt;td&gt;void&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;char&lt;/td&gt;
-&lt;td&gt;finally&lt;/td&gt;
-&lt;td&gt;native&lt;/td&gt;
-&lt;td&gt;super&lt;/td&gt;
-&lt;td&gt;volatile&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;class&lt;/td&gt;
-&lt;td&gt;float&lt;/td&gt;
-&lt;td&gt;new&lt;/td&gt;
-&lt;td&gt;switch&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;const*&lt;/td&gt;
-&lt;td&gt;for&lt;/td&gt;
-&lt;td&gt;null&lt;/td&gt;
-&lt;td&gt;synchronized&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;continue&lt;/td&gt;
-&lt;td&gt;goto*&lt;/td&gt;
-&lt;td&gt;package&lt;/td&gt;
-&lt;td&gt;this&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;default&lt;/td&gt;
-&lt;td&gt;if&lt;/td&gt;
-&lt;td&gt;private&lt;/td&gt;
-&lt;td&gt;throw&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;ul class=&#34;task-list&#34;&gt;
-&lt;li&gt;以下哪些标识符是符合规则的？&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt; currency&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; lastName&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_2&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_2&#34;&gt; fireplace&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_3&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_3&#34;&gt; _last_name&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_4&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_4&#34;&gt; xingmin&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_5&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_5&#34;&gt; class&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_6&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_6&#34;&gt; goto&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_7&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_7&#34;&gt; 4ever&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_8&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_8&#34;&gt; time-machine&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_9&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_9&#34;&gt; Int&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_10&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_10&#34;&gt; $12&lt;/label&gt;&lt;/li&gt;
-&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_11&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_11&#34;&gt; 我是变量&lt;/label&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;常量-final&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#常量-final&#34;&gt;#&lt;/a&gt; 常量 final&lt;/h2&gt;
-&lt;p&gt;&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;final&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; AMOUNT = &lt;span class=&#34;number&#34;&gt;100&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// final是一个修饰符，表示这个变量的值一旦初始化，就不能再修改了。&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h2 id=&#34;变量类型&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#变量类型&#34;&gt;#&lt;/a&gt; 变量类型&lt;/h2&gt;
-&lt;h3 id=&#34;整数-int&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#整数-int&#34;&gt;#&lt;/a&gt; 整数 int&lt;/h3&gt;
-&lt;p&gt;&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; price = in.nextInt();&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果用户输入的不是整数，则会报错  &lt;code&gt;java.util.InputMismatchException&lt;/code&gt; 。&lt;/li&gt;
-&lt;li&gt;程序要求读入多个数字时，可以在一行输入，中间用空格分开，也可以多行输入。&lt;/li&gt;
-&lt;li&gt;每次召唤 &lt;code&gt;in.nextInt()&lt;/code&gt; ，它就等待用户输入一个整数。&lt;/li&gt;
-&lt;li&gt;两个整数的运算结果只能是整数。&lt;/li&gt;
-&lt;li&gt;在 Java 中， &lt;code&gt;10&lt;/code&gt;  和 &lt;code&gt;10.0&lt;/code&gt;  是完全不同的数。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;浮点数-double&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#浮点数-double&#34;&gt;#&lt;/a&gt; 浮点数 double&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;浮点数运算有误差&lt;/strong&gt;：由于二进制的自身限制，浮点计算需要将十进制先转换为二进制，然后对二进制数进行计算，因此导致误差。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;System.out.println(&lt;span class=&#34;number&#34;&gt;1.2&lt;/span&gt;-&lt;span class=&#34;number&#34;&gt;1.1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;comment&#34;&gt;// 结果为 0.09999999999999987&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;整数类型不能表达有小数部分的数；整数运算速度快，占内存小；日常中整数运算多。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;赋值运算&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#赋值运算&#34;&gt;#&lt;/a&gt; 赋值运算&lt;/h2&gt;
-&lt;h3 id=&#34;强制类型转换&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#强制类型转换&#34;&gt;#&lt;/a&gt; 强制类型转换&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;浮点数和整数放在一起运算时，Java 会将整数转换成浮点数，然后进行浮点数运算。&lt;/li&gt;
-&lt;li&gt;强制性转换的优先级高于四则运算。&lt;br /&gt;
-&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;double&lt;/span&gt; a = &lt;span class=&#34;number&#34;&gt;1.0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;double&lt;/span&gt; b = &lt;span class=&#34;number&#34;&gt;2.0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; i = (&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;)a/b; &lt;span class=&#34;comment&#34;&gt;//会报错&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; i = (&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;)(a/b); &lt;span class=&#34;comment&#34;&gt;//不会报错&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;运算符优先级&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#运算符优先级&#34;&gt;#&lt;/a&gt; 运算符优先级&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;单目运算符 &lt;code&gt;+&lt;/code&gt;   &lt;code&gt;-&lt;/code&gt;  优先级最高&lt;/li&gt;
-&lt;li&gt;结合关系一般自左向右，单目 &lt;code&gt;+&lt;/code&gt;   &lt;code&gt;-&lt;/code&gt;  和赋值 &lt;code&gt;=&lt;/code&gt;  自右向左。&lt;br /&gt;
-&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;result = a = b = &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt; + c;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;result = &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;result = (result = result * &lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;) * &lt;span class=&#34;number&#34;&gt;6&lt;/span&gt; * (result = &lt;span class=&#34;number&#34;&gt;3&lt;/span&gt; + result);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;复合赋值&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#复合赋值&#34;&gt;#&lt;/a&gt; 复合赋值&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;5 个算术运算符， &lt;code&gt;+ - * / %&lt;/code&gt; ，可以和赋值运算符  &lt;code&gt;=&lt;/code&gt;  结合起来，形成复合赋值运算。注意，两个运算符中间不要有空格。&lt;br /&gt;
-&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;total += (sum+&lt;span class=&#34;number&#34;&gt;100&lt;/span&gt;)/&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;total = total + (sum+&lt;span class=&#34;number&#34;&gt;100&lt;/span&gt;)/&lt;span class=&#34;number&#34;&gt;2&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;total * = sum+&lt;span class=&#34;number&#34;&gt;12&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;total = total*(sum+&lt;span class=&#34;number&#34;&gt;12&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;total /= &lt;span class=&#34;number&#34;&gt;12&lt;/span&gt;+&lt;span class=&#34;number&#34;&gt;6&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;total = total / (&lt;span class=&#34;number&#34;&gt;12&lt;/span&gt;+&lt;span class=&#34;number&#34;&gt;6&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
-&lt;li&gt;递增递减运算符  &lt;code&gt;++&lt;/code&gt;   &lt;code&gt;--&lt;/code&gt; ，给变量 + 1 或 - 1&lt;/li&gt;
-&lt;li&gt;前缀后缀：&lt;br /&gt;
-&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;a = &lt;span class=&#34;number&#34;&gt;14&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;t1 = a++; &lt;span class=&#34;comment&#34;&gt;// t1先被赋值为 a 即14， a自加到 15&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;t2 = ++a; &lt;span class=&#34;comment&#34;&gt;// a先自加到 15，t2被赋值为 a 即 15&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1 id=&#34;编程题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#编程题&#34;&gt;#&lt;/a&gt; 编程题&lt;/h1&gt;
-&lt;h2 id=&#34;题目1-温度转换5分&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#题目1-温度转换5分&#34;&gt;#&lt;/a&gt; 题目 1. 温度转换（5 分）&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;题目内容&lt;/strong&gt;&lt;br /&gt;
-写一个将华氏温度转换成摄氏温度的程序，转换的公式是：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;°F = (9/5)*°C + 32&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;其中 C 表示摄氏温度，F 表示华氏温度。&lt;/p&gt;
-&lt;p&gt;程序的输入是一个整数，表示华氏温度。输出对应的摄氏温度，也是一个整数。&lt;/p&gt;
-&lt;p&gt;提示，为了把计算结果的浮点数转换成整数，需要使用下面的表达式：&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;(int)x;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;其中 x 是要转换的那个浮点数。&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;注意：除了题目要求的输出，不能输出任何其他内容，比如输入时的提示，输出时的说明等等都不能。这道题目要求转换后的数字，程序就只能输出这个数字，除此之外任何内容都不能输出。&lt;/em&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;输入格式&lt;/strong&gt;&lt;br /&gt;
-一个整数。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;输出格式&lt;/strong&gt;&lt;br /&gt;
-一个整数。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;输入样例&lt;/strong&gt;&lt;br /&gt;
- 100&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;输出样例&lt;/strong&gt;&lt;br /&gt;
- 37&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;解题代码&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#解题代码&#34;&gt;#&lt;/a&gt; 解题代码&lt;/h3&gt;
-&lt;p&gt;&lt;figure class=&#34;highlight java&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;import&lt;/span&gt; java.util.Scanner;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;class&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;Main&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&lt;span class=&#34;function&#34;&gt;&lt;span class=&#34;keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;keyword&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;title&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;params&#34;&gt;(String[] args)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		Scanner in = &lt;span class=&#34;keyword&#34;&gt;new&lt;/span&gt; Scanner(System.in);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;comment&#34;&gt;// 获得输入的整数&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt; fahrenheit = in.nextInt();&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;comment&#34;&gt;// 计算摄氏度&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;keyword&#34;&gt;double&lt;/span&gt; centigrade = (fahrenheit - &lt;span class=&#34;number&#34;&gt;32&lt;/span&gt;) / (&lt;span class=&#34;number&#34;&gt;9&lt;/span&gt; / &lt;span class=&#34;number&#34;&gt;5.0&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		&lt;span class=&#34;comment&#34;&gt;// 将浮点数转换为整数输出&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;		System.out.println((&lt;span class=&#34;keyword&#34;&gt;int&lt;/span&gt;)centigrade);&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://maoyifan.github.io/computer-science/java/course-8/week-1/</guid>
-            <title>第1周 计算</title>
-            <link>https://maoyifan.github.io/computer-science/java/course-8/week-1/</link>
-            <category term="计算机科学" scheme="https://maoyifan.github.io/categories/computer-science/" />
-            <category term="Java" scheme="https://maoyifan.github.io/categories/computer-science/java/" />
-            <category term="鸟哥Linux私房菜（基础篇）" scheme="https://maoyifan.github.io/categories/computer-science/java/course-8/" />
             <pubDate>Sun, 12 Apr 2020 20:46:25 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;:::note info&lt;br /&gt;
  以下为个人学习笔记和习题整理&lt;br /&gt;
