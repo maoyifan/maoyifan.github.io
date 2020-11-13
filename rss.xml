@@ -16,6 +16,9 @@
             <guid isPermalink="true">https://maoyifan.github.io/computer-science/java/course-16/%E7%AE%80%E5%8D%95/</guid>
             <title>剑指OFFER-简单</title>
             <link>https://maoyifan.github.io/computer-science/java/course-16/%E7%AE%80%E5%8D%95/</link>
+            <category term="计算机科学" scheme="https://maoyifan.github.io/categories/computer-science/" />
+            <category term="Java" scheme="https://maoyifan.github.io/categories/computer-science/java/" />
+            <category term="剑指-offer" scheme="https://maoyifan.github.io/categories/computer-science/java/course-16/" />
             <pubDate>Thu, 12 Nov 2020 16:59:25 +0800</pubDate>
             <description><![CDATA[ &lt;p&gt;:::note info&lt;br /&gt;
 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXNldC9sY29mLz9kaWZmaWN1bHR5PSVFNyVBRSU4MCVFNSU4RCU5NQ==&#34;&gt;https://leetcode-cn.com/problemset/lcof/?difficulty = 简单&lt;/span&gt;&lt;br /&gt;
@@ -279,7 +282,7 @@ MySql 数据库提供了多种存储引擎。用户可以根据不同的需求�
             <link>https://maoyifan.github.io/computer-science/java/course-16/%E4%B8%AD%E7%AD%89/</link>
             <category term="计算机科学" scheme="https://maoyifan.github.io/categories/computer-science/" />
             <category term="Java" scheme="https://maoyifan.github.io/categories/computer-science/java/" />
-            <category term="java编程思想" scheme="https://maoyifan.github.io/categories/computer-science/java/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" />
+            <category term="剑指-offer" scheme="https://maoyifan.github.io/categories/computer-science/java/course-16/" />
             <pubDate>Sun, 01 Nov 2020 22:33:45 +0800</pubDate>
             <description><![CDATA[  ]]></description>
         </item>
@@ -289,7 +292,7 @@ MySql 数据库提供了多种存储引擎。用户可以根据不同的需求�
             <link>https://maoyifan.github.io/computer-science/java/course-16/%E5%9B%B0%E9%9A%BE/</link>
             <category term="计算机科学" scheme="https://maoyifan.github.io/categories/computer-science/" />
             <category term="Java" scheme="https://maoyifan.github.io/categories/computer-science/java/" />
-            <category term="java编程思想" scheme="https://maoyifan.github.io/categories/computer-science/java/java%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/" />
+            <category term="剑指-offer" scheme="https://maoyifan.github.io/categories/computer-science/java/course-16/" />
             <pubDate>Sun, 01 Nov 2020 22:33:45 +0800</pubDate>
             <description><![CDATA[  ]]></description>
         </item>
